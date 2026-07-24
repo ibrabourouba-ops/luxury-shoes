@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --nike-black: #050506;
+  --nike-white: #f5f5f7;
+  --nike-gray: #8a8a8f;
+  --nike-red: #cf0a2c;
+  --nike-ember: #ff1e3c;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--nike-black);
+}
+
+body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  background: var(--nike-black);
+  color: var(--nike-white);
+  overflow-x: hidden;
+}
+
+/* Impact display face */
+.font-display {
+  font-family: var(--font-anton), Impact, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--nike-white), var(--nike-red));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ember-text {
+  background: linear-gradient(135deg, var(--nike-red), var(--nike-ember));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Outlined "ghost" wordmark used behind the hero shoe */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(245, 245, 247, 0.12);
+}
+
+/* Fine film grain to keep dark areas from banding */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  z-index: 40;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Ambient hero embers (drift upward). Disabled under reduced-motion by the
+   global rule at the bottom of this file. */
+@keyframes ember {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-105vh) translateX(24px);
+    opacity: 0;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--nike-black);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--nike-red), #3a0a12);
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--nike-red);
+  color: #fff;
+}
+
+/* Keyboard focus visibility */
+:focus-visible {
+  outline: 2px solid var(--nike-red);
+  outline-offset: 3px;
+}
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
